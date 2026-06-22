@@ -1461,46 +1461,46 @@ def registrar_resultados():
 
     tracker.registrar_partido("Argentina",2,"Austria",0,amarillas_local=2,amarillas_visitante=2)
 
-    # _registrar_partidos_simulados([
-    #     ('Francia', 'Irak'),
-    #     ('Noruega', 'Senegal'),
-    #     ('Jordania', 'Argelia'),
-    #     ('Portugal', 'Uzbekistán'),
-    #     ('Inglaterra', 'Ghana'),
-    #     ('Panamá', 'Croacia'),
-    #     ('Colombia', 'Congo'),
-    # ], 'Jornada 2 Grupos I-L')
+    _registrar_partidos_simulados([
+        ('Francia', 'Irak'),
+        ('Noruega', 'Senegal'),
+        ('Jordania', 'Argelia'),
+        ('Portugal', 'Uzbekistán'),
+        ('Inglaterra', 'Ghana'),
+        ('Panamá', 'Croacia'),
+        ('Colombia', 'Congo'),
+    ], 'Jornada 2 Grupos I-L')
 
-    # # Jornada 3
-    # _registrar_partidos_simulados([
-    #     ('México', 'Chequia'),
-    #     ('Corea del Sur', 'Sudáfrica'),
-    #     ('Canadá', 'Suiza'),
-    #     ('Boznia Herzegovina', 'Qatar'),
-    #     ('Brasil', 'Escocia'),
-    #     ('Marruecos', 'Haití'),
-    #     ('Estados Unidos', 'Turquía'),
-    #     ('Australia', 'Paraguay'),
-    #     ('Alemania', 'Ecuador'),
-    #     ('Costa de Marfil', 'Curacao'),
-    #     ('Suecia', 'Japón'),
-    #     ('Paises Bajos', 'Túnez'),
-    #     ('Nueva Zelanda', 'Bélgica'),
-    #     ('Irán', 'Egipto'),
-    #     ('Uruguay', 'España'),
-    #     ('Arabia Saudí', 'Cabo Verde'),
-    # ], 'Jornada 3 Grupos A-H')
+    # Jornada 3
+    _registrar_partidos_simulados([
+        ('México', 'Chequia'),
+        ('Corea del Sur', 'Sudáfrica'),
+        ('Canadá', 'Suiza'),
+        ('Boznia Herzegovina', 'Qatar'),
+        ('Brasil', 'Escocia'),
+        ('Marruecos', 'Haití'),
+        ('Estados Unidos', 'Turquía'),
+        ('Australia', 'Paraguay'),
+        ('Alemania', 'Ecuador'),
+        ('Costa de Marfil', 'Curacao'),
+        ('Suecia', 'Japón'),
+        ('Paises Bajos', 'Túnez'),
+        ('Nueva Zelanda', 'Bélgica'),
+        ('Irán', 'Egipto'),
+        ('Uruguay', 'España'),
+        ('Arabia Saudí', 'Cabo Verde'),
+    ], 'Jornada 3 Grupos A-H')
 
-    # _registrar_partidos_simulados([
-    #     ('Francia', 'Noruega'),
-    #     ('Senegal', 'Irak'),
-    #     ('Argentina', 'Jordania'),
-    #     ('Austria', 'Argelia'),
-    #     ('Portugal', 'Colombia'),
-    #     ('Congo', 'Uzbekistán'),
-    #     ('Inglaterra', 'Panamá'),
-    #     ('Ghana', 'Croacia'),
-    # ], 'Jornada 3 Grupos I-L')
+    _registrar_partidos_simulados([
+        ('Francia', 'Noruega'),
+        ('Senegal', 'Irak'),
+        ('Argentina', 'Jordania'),
+        ('Austria', 'Argelia'),
+        ('Portugal', 'Colombia'),
+        ('Congo', 'Uzbekistán'),
+        ('Inglaterra', 'Panamá'),
+        ('Ghana', 'Croacia'),
+    ], 'Jornada 3 Grupos I-L')
 
 # Ejemplo de uso:
 if __name__ == "__main__":
