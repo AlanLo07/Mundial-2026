@@ -1460,11 +1460,11 @@ def registrar_resultados():
     tracker.registrar_partido("Nueva Zelanda",1, "Egipto",3,amarillas_local=2,amarillas_visitante=1)
 
     tracker.registrar_partido("Argentina",2,"Austria",0,amarillas_local=2,amarillas_visitante=2)
+    tracker.registrar_partido("Francia",3,"Irak",0,amarillas_visitante=1)
+    tracker.registrar_partido("Noruega",3,"Senegal",2)
+    tracker.registrar_partido("Jordania",1,"Argelia",2,amarillas_local=1,amarillas_visitante=1)
 
     _registrar_partidos_simulados([
-        ('Francia', 'Irak'),
-        ('Noruega', 'Senegal'),
-        ('Jordania', 'Argelia'),
         ('Portugal', 'Uzbekistán'),
         ('Inglaterra', 'Ghana'),
         ('Panamá', 'Croacia'),
