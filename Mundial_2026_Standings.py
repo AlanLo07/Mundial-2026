@@ -1067,14 +1067,14 @@ TACTICAS_SELECCION = {
     'Cabo Verde': '4-2-3-1',
     'Argentina': '4-4-2',
     'Austria': '4-2-3-1',
-    'Jordania': '5-4-1',
-    'Argelia': '4-4-2',
+    'Jordania': '3-4-3',
+    'Argelia': '4-3-3',
     'Francia': '4-2-3-1',
     'Irak': '4-5-1',
-    'Noruega': '4-3-3',
-    'Senegal': '4-2-3-1',
-    'Portugal': '4-3-3',
-    'Uzbekistán': '4-4-2',
+    'Noruega': '4-1-2-3',
+    'Senegal': '4-3-3',
+    'Portugal': '4-2-3-1',
+    'Uzbekistán': '3-4-3',
     'Colombia': '4-2-3-1',
     'Congo': '4-4-2',
     'Inglaterra': '4-3-3',
@@ -1464,8 +1464,8 @@ def registrar_resultados():
     tracker.registrar_partido("Noruega",3,"Senegal",2)
     tracker.registrar_partido("Jordania",1,"Argelia",2,amarillas_local=1,amarillas_visitante=1)
 
+    tracker.registrar_partido("Portugal",5,"Uzbekistán",0,amarillas_local=1,amarillas_visitante=1)
     _registrar_partidos_simulados([
-        ('Portugal', 'Uzbekistán'),
         ('Inglaterra', 'Ghana'),
         ('Panamá', 'Croacia'),
         ('Colombia', 'Congo'),
