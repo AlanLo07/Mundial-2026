@@ -1076,11 +1076,11 @@ TACTICAS_SELECCION = {
     'Portugal': '4-2-3-1',
     'Uzbekistán': '3-4-3',
     'Colombia': '4-2-3-1',
-    'Congo': '4-4-2',
-    'Inglaterra': '4-3-3',
-    'Ghana': '4-2-3-1',
-    'Panamá': '5-4-1',
-    'Croacia': '4-3-3',
+    'Congo': '5-3-2',
+    'Inglaterra': '4-2-3-1',
+    'Ghana': '5-4-1',
+    'Panamá': '3-4-3',
+    'Croacia': '4-2-3-1',
 }
 
 FUERZA_SELECCION = {
@@ -1465,12 +1465,11 @@ def registrar_resultados():
     tracker.registrar_partido("Jordania",1,"Argelia",2,amarillas_local=1,amarillas_visitante=1)
 
     tracker.registrar_partido("Portugal",5,"Uzbekistán",0,amarillas_local=1,amarillas_visitante=1)
-    _registrar_partidos_simulados([
-        ('Inglaterra', 'Ghana'),
-        ('Panamá', 'Croacia'),
-        ('Colombia', 'Congo'),
-    ], 'Jornada 2 Grupos I-L')
+    tracker.registrar_partido("Inglaterra",0,"Ghana",0,amarillas_local=1,amarillas_visitante=1)
+    tracker.registrar_partido("Panamá",0,"Croacia",1,amarillas_local=1,amarillas_visitante=1)
+    tracker.registrar_partido("Colombia",1,"Congo",0,amarillas_local=2,amarillas_visitante=1)
 
+    
     # Jornada 3
     _registrar_partidos_simulados([
         ('México', 'Chequia'),
@@ -1501,7 +1500,7 @@ def registrar_resultados():
         ('Inglaterra', 'Panamá'),
         ('Ghana', 'Croacia'),
     ], 'Jornada 3 Grupos I-L')
-
+    
 # Ejemplo de uso:
 if __name__ == "__main__":
     print("🌍 MUNDIAL 2026 - SISTEMA DE SEGUIMIENTO")
