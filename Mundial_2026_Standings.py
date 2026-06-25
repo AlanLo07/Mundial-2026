@@ -227,18 +227,46 @@ class MundialTracker:
         """Aplica los criterios de desempate FIFA para equipos con los mismos puntos
         
         Criterios por orden:
-        1. Diferencia de goles en partidos entre ellos
-        2. Goles marcados en partidos entre ellos
-        3. Diferencia de goles en todos los partidos
-        4. Goles marcados en todos los partidos
-        5. Puntos por conducta deportiva
+        1. Si son 2 equipos: resultado del enfrentamiento directo
+        2. Diferencia de goles en partidos entre ellos
+        3. Goles marcados en partidos entre ellos
+        4. Diferencia de goles en todos los partidos
+        5. Goles marcados en todos los partidos
+        6. Puntos por conducta deportiva
         """
         
         if len(equipos_empatados) <= 1:
             return equipos_empatados
-        
-        # Obtener grupo de los equipos
-        grupo = self.stats[equipos_empatados[0]]['grupo']
+
+        # Regla solicitada: si hay empate entre 2 equipos, priorizar su duelo directo.
+        # Si ese partido terminó empatado, se continúa con los demás criterios.
+        if len(equipos_empatados) == 2:
+            equipo_a, equipo_b = equipos_empatados
+            partidos_directos = [
+                p for p in self.partidos
+                if {p['local'], p['visitante']} == {equipo_a, equipo_b}
+            ]
+
+            if partidos_directos:
+                puntos_directos = {equipo_a: 0, equipo_b: 0}
+                for partido in partidos_directos:
+                    local = partido['local']
+                    visitante = partido['visitante']
+                    gl = partido['goles_local']
+                    gv = partido['goles_visitante']
+
+                    if gl > gv:
+                        puntos_directos[local] += 3
+                    elif gv > gl:
+                        puntos_directos[visitante] += 3
+                    else:
+                        puntos_directos[local] += 1
+                        puntos_directos[visitante] += 1
+
+                if puntos_directos[equipo_a] > puntos_directos[equipo_b]:
+                    return [equipo_a, equipo_b]
+                if puntos_directos[equipo_b] > puntos_directos[equipo_a]:
+                    return [equipo_b, equipo_a]
         
         # Primer paso: Partidos entre ellos
         partidos_entre = self._obtener_partidos_entre_equipos(equipos_empatados)
@@ -1033,17 +1061,17 @@ class MundialTracker:
 tracker = MundialTracker()
 
 TACTICAS_SELECCION = {
-    'México': '4-3-3',
-    'Corea del Sur': '4-2-3-1',
-    'Chequia': '4-4-2',
-    'Sudáfrica': '4-4-2',
-    'Canadá': '4-2-3-1',
-    'Suiza': '3-5-2',
-    'Boznia Herzegovina': '4-3-3',
-    'Qatar': '5-4-1',
+    'México': '4-1-2-3',
+    'Corea del Sur': '3-4-1-2',
+    'Chequia': '5-2-3',
+    'Sudáfrica': '4-2-3-1',
+    'Canadá': '4-4-2',
+    'Suiza': '4-1-2-3',
+    'Boznia Herzegovina': '4-4-2',
+    'Qatar': '4-1-2-3',
     'Brasil': '4-3-3',
-    'Marruecos': '4-1-4-1',
-    'Escocia': '3-4-2-1',
+    'Marruecos': '4-2-3-1',
+    'Escocia': '4-2-3-1',
     'Haití': '4-4-2',
     'Estados Unidos': '4-3-3',
     'Australia': '4-2-3-1',
@@ -1469,37 +1497,39 @@ def registrar_resultados():
     tracker.registrar_partido("Panamá",0,"Croacia",1,amarillas_local=1,amarillas_visitante=1)
     tracker.registrar_partido("Colombia",1,"Congo",0,amarillas_local=2,amarillas_visitante=1)
 
-    
     # Jornada 3
-    _registrar_partidos_simulados([
-        ('México', 'Chequia'),
-        ('Corea del Sur', 'Sudáfrica'),
-        ('Canadá', 'Suiza'),
-        ('Boznia Herzegovina', 'Qatar'),
-        ('Brasil', 'Escocia'),
-        ('Marruecos', 'Haití'),
-        ('Estados Unidos', 'Turquía'),
-        ('Australia', 'Paraguay'),
-        ('Alemania', 'Ecuador'),
-        ('Costa de Marfil', 'Curacao'),
-        ('Suecia', 'Japón'),
-        ('Paises Bajos', 'Túnez'),
-        ('Nueva Zelanda', 'Bélgica'),
-        ('Irán', 'Egipto'),
-        ('Uruguay', 'España'),
-        ('Arabia Saudí', 'Cabo Verde'),
-    ], 'Jornada 3 Grupos A-H')
+    tracker.registrar_partido("Suiza",2,"Canadá",1,amarillas_local=1,amarillas_visitante=2)
+    tracker.registrar_partido("Boznia Herzegovina",3,"Qatar",1,amarillas_local=2,amarillas_visitante=1)
 
-    _registrar_partidos_simulados([
-        ('Francia', 'Noruega'),
-        ('Senegal', 'Irak'),
-        ('Argentina', 'Jordania'),
-        ('Austria', 'Argelia'),
-        ('Portugal', 'Colombia'),
-        ('Congo', 'Uzbekistán'),
-        ('Inglaterra', 'Panamá'),
-        ('Ghana', 'Croacia'),
-    ], 'Jornada 3 Grupos I-L')
+    tracker.registrar_partido("Escocia",0,"Brasil",3,amarillas_local=1,amarillas_visitante=2)
+    tracker.registrar_partido("Marruecos",4,"Haití",2,amarillas_visitante=3)
+
+    tracker.registrar_partido("Chequia",0,"México",3,amarillas_local=0,amarillas_visitante=1)
+    tracker.registrar_partido("Sudáfrica",1,"Corea del Sur",0,amarillas_local=1,amarillas_visitante=1)
+    
+    # _registrar_partidos_simulados([
+    #     ('Estados Unidos', 'Turquía'),
+    #     ('Australia', 'Paraguay'),
+    #     ('Alemania', 'Ecuador'),
+    #     ('Costa de Marfil', 'Curacao'),
+    #     ('Suecia', 'Japón'),
+    #     ('Paises Bajos', 'Túnez'),
+    #     ('Nueva Zelanda', 'Bélgica'),
+    #     ('Irán', 'Egipto'),
+    #     ('Uruguay', 'España'),
+    #     ('Arabia Saudí', 'Cabo Verde'),
+    # ], 'Jornada 3 Grupos A-H')
+
+    # _registrar_partidos_simulados([
+    #     ('Francia', 'Noruega'),
+    #     ('Senegal', 'Irak'),
+    #     ('Argentina', 'Jordania'),
+    #     ('Austria', 'Argelia'),
+    #     ('Portugal', 'Colombia'),
+    #     ('Congo', 'Uzbekistán'),
+    #     ('Inglaterra', 'Panamá'),
+    #     ('Ghana', 'Croacia'),
+    # ], 'Jornada 3 Grupos I-L')
     
 # Ejemplo de uso:
 if __name__ == "__main__":
